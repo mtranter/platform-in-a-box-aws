@@ -1,0 +1,28 @@
+{
+  "folders": [
+    {
+      "name": "TF Modules",
+      "path": "modules"
+    },
+    {
+      "name": "Example/RealWorld/Catalog",
+      "path": "example/realworld/services/catalog"
+    },
+    {
+      "name": "Example/RealWorld/Users",
+      "path": "example/realworld/services/users"
+    },
+    {
+      "name": "Example/RealWorld/BFF",
+      "path": "example/realworld/services/bff"
+    },
+    {
+      "name": "Example/RealWorld/TF Modules",
+      "path": "example/realworld/modules"
+    },
+    {
+      "name": "root",
+      "path": "."
+    },
+  ]
+}
