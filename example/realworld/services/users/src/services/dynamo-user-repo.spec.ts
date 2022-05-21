@@ -1,27 +1,27 @@
-import { DynamoDB } from "aws-sdk";
-import { User } from "../domain/user-service";
-import { buildDynamoUserRepo } from "./dynamo-user-repo";
+import { DynamoDB } from 'aws-sdk';
+import { User } from '../domain/user-service';
+import { buildDynamoUserRepo } from './dynamo-user-repo';
 
-describe("DynamoDB Repo", () => {
+describe('DynamoDB Repo', () => {
   const dynamoDbClient = new DynamoDB({
-    endpoint: "localhost:8000",
+    endpoint: 'localhost:8000',
     sslEnabled: false,
-    region: "local-env",
+    region: 'local-env',
     credentials: {
-      accessKeyId: "fakeMyKeyId",
-      secretAccessKey: "fakeSecretAccessKey",
-    },
+      accessKeyId: 'fakeMyKeyId',
+      secretAccessKey: 'fakeSecretAccessKey'
+    }
   });
-  const sut = buildDynamoUserRepo("UserService", dynamoDbClient);
-  describe("User CRUD", () => {
-    it("should put and get RRP", async () => {
+  const sut = buildDynamoUserRepo('UserService', dynamoDbClient);
+  describe('User CRUD', () => {
+    it('should put and get RRP', async () => {
       const user: User = {
-        id: "1",
-        username: "JSmith",
-        email: "j.smith@smithtown.com",
-        passwordHash: "#",
+        id: '1',
+        username: 'JSmith',
+        email: 'j.smith@smithtown.com',
+        passwordHash: '#'
       };
-      await sut.putUser(user);
+      await sut.transactionally(async (tx) => tx.putUser(user));
       const userById = await sut.getUser(user.id);
       const userByEmail = await sut.getUserByEmail(user.email);
       const userByUsername = await sut.getUserByUsername(user.username);

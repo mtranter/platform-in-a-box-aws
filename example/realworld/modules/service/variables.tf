@@ -12,16 +12,16 @@ variable "dependencies_folder" {
 
 variable "api_handler" {
   type = object({
-    handler             = string
-    api_openapi_spec    = string
+    handler          = string
+    api_openapi_spec = string
   })
   default = null
 }
 
 variable "queue_handlers" {
   type = set(object({
-    name                = string
-    handler             = string
+    name    = string
+    handler = string
     queue_config = object({
       name            = string
       is_fifo         = bool

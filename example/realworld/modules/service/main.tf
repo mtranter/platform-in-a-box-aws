@@ -14,7 +14,7 @@ module "table" {
   global_secondary_indexes = coalesce(var.dynamodb_table.gsis, [])
   local_secondary_indexes  = coalesce(var.dynamodb_table.lsis, [])
   tags                     = { ServiceName = var.service_name }
-  stream_enabled           = var.stream_enabled
+  stream_enabled           = var.dynamodb_table.stream_enabled
 }
 
 module "sns" {

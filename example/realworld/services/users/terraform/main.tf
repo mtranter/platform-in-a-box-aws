@@ -21,7 +21,8 @@ module "service" {
       name = "range"
       type = "S"
     }
-    table_name = "PricingService"
+    stream_enabled = true
+    table_name     = "PricingService"
   }
 }
 
