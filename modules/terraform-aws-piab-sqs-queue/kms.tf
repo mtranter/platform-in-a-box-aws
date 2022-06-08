@@ -23,8 +23,7 @@ data "aws_iam_policy_document" "key_policy" {
     sid    = "Allow access through Amazon SQS for all principals in the account that are authorized to use Amazon SQS"
     effect = "Allow"
     principals {
-      identifiers = [
-      "arn:aws:iam::${data.aws_caller_identity.me.account_id}:*"]
+      identifiers = ["*"]
       type = "AWS"
     }
     actions = [
