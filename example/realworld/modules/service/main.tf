@@ -2,7 +2,8 @@ data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
 locals {
-  topic_env_names = { for t in var.sns_topics : "${t.name}_TOPIC_ARN" => module.sns[t.name].arn }
+  topic_env_names = { for t in var.sns_topics : "${upper(t.name)}_TOPIC_ARN" => module.sns[t.name].topic.arn }
+  topic_arns      = [for t in var.sns_topics : module.sns[t.name].topic.arn]
 }
 
 module "table" {
@@ -139,7 +140,7 @@ data "aws_iam_policy_document" "lambda_permissions" {
         "sns:Publish"
       ]
 
-      resources = module.sns.*.topic.arn
+      resources = local.topic_arns
     }
   }
   dynamic "statement" {
@@ -162,4 +163,13 @@ resource "aws_iam_role_policy" "lambda_permission" {
   for_each = { for k, v in merge(module.api_function, module.queue_handlers) : k => v }
   role     = each.value.execution_role.id
   policy   = data.aws_iam_policy_document.lambda_permissions.json
+}
+
+module "streams_event_dispatcher" {
+  count        = var.publishes_events_via_dynamo && var.dynamodb_table != null ? 1 : 0
+  source       = "./../dynamodb-event-dispatcher"
+  commit_hash  = var.commit_hash
+  service_name = var.service_name
+  table_name   = module.table[0].table.id
+  topic_arns   = local.topic_arns
 }

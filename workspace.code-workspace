@@ -5,8 +5,8 @@
       "path": "modules"
     },
     {
-      "name": "Example/RealWorld/Catalog",
-      "path": "example/realworld/services/catalog"
+      "name": "Example/RealWorld",
+      "path": "example/realworld"
     },
     {
       "name": "Example/RealWorld/Users",

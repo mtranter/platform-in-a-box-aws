@@ -1,3 +1,7 @@
+locals {
+  is_fifo = substr(var.topic_name, -5, -1) == ".fifo"
+}
+
 data "aws_sns_topic" "topic" {
   name = var.topic_name
 }
@@ -48,8 +52,8 @@ EOF
   role   = aws_iam_role.sns_can_firehose.id
 }
 
-module "forwarder" {
-  count                = var.is_fifo ? 1 : 0
+module "fifo_forwarder" {
+  count                = local.is_fifo ? 1 : 0
   source               = "./fifo_forwarder"
   topic_arn            = data.aws_sns_topic.topic.arn
   delivery_stream_name = aws_kinesis_firehose_delivery_stream.stream.name
@@ -58,7 +62,7 @@ module "forwarder" {
 }
 
 resource "aws_sns_topic_subscription" "subscription" {
-  count                 = var.is_fifo ? 0 : 1
+  count                 = local.is_fifo ? 0 : 1
   endpoint              = aws_kinesis_firehose_delivery_stream.stream.arn
   protocol              = "firehose"
   topic_arn             = data.aws_sns_topic.topic.arn
@@ -96,13 +100,12 @@ resource "aws_kinesis_firehose_delivery_stream" "stream" {
     bucket_arn = data.aws_s3_bucket.bucket.arn
     prefix     = var.bucket_prefix
   }
-
 }
 
 data "aws_region" "current" {}
 data "aws_caller_identity" "me" {}
 
-module "cloudwatch_logs" {
+module "forwader_cloudwatch_logs" {
   source         = "./..//terraform-aws-piab-log-group"
   name           = "${var.task_name}Logs"
   retention_days = 7
@@ -146,7 +149,7 @@ resource "aws_iam_role_policy" "policy" {
                "logs:PutLogEvents"
            ],
            "Resource": [
-               "${module.cloudwatch_logs.log_group.arn}:*"
+               "${module.forwader_cloudwatch_logs.log_group.arn}:*"
            ]
         }
     ]

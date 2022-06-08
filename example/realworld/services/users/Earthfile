@@ -1,0 +1,18 @@
+VERSION 0.6
+FROM timbru31/java-node:17-jdk-16
+
+init:
+  WORKDIR /project
+  COPY ./package.json ./
+  COPY ./yarn.lock ./
+  RUN yarn install --frozen-lockfile 
+
+package:
+  FROM +init
+  COPY --dir . ./
+  RUN yarn checks && yarn package
+  SAVE ARTIFACT ./package
+
+deploy:
+  FROM +package
+  BUILD ./terraform+deploy

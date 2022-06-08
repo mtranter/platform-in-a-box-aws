@@ -27,7 +27,7 @@ resource "aws_kms_key" "key" {
             "Sid" : "Allow access through Amazon DynamoDB for all principals in the account that are authorized to use Amazon DynamoDB",
             "Effect" : "Allow",
             "Principal" : {
-              "AWS" : "*"
+              "AWS" : "arn:aws:iam::${data.aws_caller_identity.me.account_id}:*"
             },
             "Action" : [ "kms:Encrypt", "kms:Decrypt", "kms:ReEncrypt*", "kms:GenerateDataKey*", "kms:CreateGrant", "kms:DescribeKey" ],
             "Resource" : "*",

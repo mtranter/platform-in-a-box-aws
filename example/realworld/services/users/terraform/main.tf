@@ -1,6 +1,4 @@
-variable "commit_hash" {
-  type = string
-}
+
 
 module "service" {
   source              = "./../../../modules/service"
@@ -8,8 +6,12 @@ module "service" {
   source_folder       = "${path.module}/../package/dist"
   dependencies_folder = "${path.module}/../package/dependencies"
   commit_hash         = var.commit_hash
+  sns_topics = [{
+    name    = "UserEvents"
+    is_fifo = true
+  }]
   api_handler = {
-    api_openapi_spec = "${path.module}/../openapi.json"
+    api_openapi_spec = "${path.module}/../package/openapi.json"
     handler          = "api.handler"
   }
   dynamodb_table = {

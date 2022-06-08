@@ -16,7 +16,7 @@ describe('Pricing API', () => {
     getUserByEmail,
     getUserByUsername
   };
-  const svc = buildUserService(mockRepo);
+  const svc = buildUserService(mockRepo, 'my-topic');
 
   const sut = buildApi(svc, buildJwt('secret'));
   const callApi = (r: Partial<APIGatewayProxyEvent>): Promise<APIGatewayProxyResult> => {

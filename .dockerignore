@@ -1,0 +1,8 @@
+*/*/.terraform
+*/*/.idea
+*/*/.terraform.lock.hcl
+*/*/node_modules    
+*/*/dist/
+*/*/coverage/
+.tfsec
+Earthfile

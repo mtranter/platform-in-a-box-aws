@@ -1,0 +1,11 @@
+FROM ubuntu:22.04
+
+RUN apt update && apt -y install curl wget lsb-release gnupg
+RUN wget -qO - terraform.gpg https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/terraform-archive-keyring.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/terraform-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" > /etc/apt/sources.list.d/terraform.list && \
+    apt update && \
+    apt -y install terraform
+RUN curl -Lo ./tfsec https://github.com/aquasecurity/tfsec/releases/download/v1.16.3/tfsec-linux-amd64 && \
+    chmod +x ./tfsec && mv ./tfsec /usr/bin/tfsec
+RUN tfsec -v && \
+    terraform --version

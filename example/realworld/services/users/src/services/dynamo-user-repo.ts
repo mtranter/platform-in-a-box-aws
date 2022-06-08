@@ -7,7 +7,9 @@ type Dto = {
   range: string;
   gsi1Hash?: string;
   gsi2Hash?: string;
-  data: User | Event;
+  isEvent: boolean;
+  topicArn?: string;
+  data: User | Omit<Event, 'topicArn'>;
 };
 
 const userHashKey = (id: string) => `USER#${id}`;
@@ -20,14 +22,20 @@ const userDto = (user: User): Dto => ({
   ...userKey(user.id),
   gsi1Hash: user.email,
   gsi2Hash: user.username,
-  data: user
+  data: user,
+  isEvent: false
 });
 
-const eventDto = (e: Event): Dto => ({
-  hash: `EVENT#${e.eventId}`,
-  range: 'EVENT',
-  data: e
-});
+const eventDto = (e: Event): Dto => {
+  const { topicArn, ...event } = e;
+  return {
+    hash: `EVENT#${e.eventId}`,
+    range: 'EVENT',
+    data: event,
+    isEvent: true,
+    topicArn
+  };
+};
 
 export const buildDynamoUserRepo = (tableName: string, client: DynamoDB): UserRepo => {
   const table = tableBuilder<Dto>(tableName)

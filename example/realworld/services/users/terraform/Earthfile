@@ -1,0 +1,20 @@
+VERSION 0.6
+
+init:
+  FROM ./../../../modules/service+build
+  WORKDIR /project/example/realworld/services/users/terraform
+  COPY ./* ./
+  RUN --secret AWS_ACCESS_KEY_ID=+secrets/AWS_ACCESS_KEY_ID \
+      --secret AWS_SECRET_ACCESS_KEY=+secrets/AWS_SECRET_ACCESS_KEY \
+      --secret AWS_SESSION_TOKEN=+secrets/AWS_SESSION_TOKEN \
+      terraform init
+
+deploy:
+  ARG commithash
+  FROM +init
+  COPY --dir ./..+package/package ./../
+  RUN ls -a
+  RUN --secret AWS_ACCESS_KEY_ID=+secrets/AWS_ACCESS_KEY_ID \
+      --secret AWS_SECRET_ACCESS_KEY=+secrets/AWS_SECRET_ACCESS_KEY \
+      --secret AWS_SESSION_TOKEN=+secrets/AWS_SESSION_TOKEN \
+      terraform plan -var commit_hash=$commithash

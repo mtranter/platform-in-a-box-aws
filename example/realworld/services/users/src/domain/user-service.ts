@@ -21,8 +21,10 @@ export type EventPayload =
 
 export type Event = {
   eventId: string;
+  key: string;
   timestamp: string;
-  event: EventPayload;
+  value: EventPayload;
+  topicArn: string;
 };
 
 export type UserRepo = {
@@ -45,7 +47,7 @@ export type UserService = {
   registerUser: (req: RegisterRequest) => Promise<User | 'UserExists'>;
 };
 
-export const buildUserService = (repo: UserRepo): UserService => ({
+export const buildUserService = (repo: UserRepo, eventTopicArn: string): UserService => ({
   getUser: (id) => repo.getUser(id),
   loginUser: async (req) => {
     const user = await repo.getUserByEmail(req.email);
@@ -73,7 +75,9 @@ export const buildUserService = (repo: UserRepo): UserService => ({
       tx.putEvent({
         eventId: uuid(),
         timestamp: new Date().toISOString(),
-        event: { type: 'UserCreated', newUser: safeUser }
+        key: safeUser.id,
+        value: { type: 'UserCreated', newUser: safeUser },
+        topicArn: eventTopicArn
       });
     });
     return user;

@@ -15,6 +15,6 @@ yarn install && \
     yarn build && \
     yarn install --production --frozen-lockfile --modules-folder ./package/dependencies/nodejs/node_modules
 
-# yarn openapi ./package/openapi.json
+yarn openapi ./package/openapi.json
 
 cp -r ./dist ./package

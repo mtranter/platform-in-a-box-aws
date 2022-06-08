@@ -16,6 +16,9 @@ const envOrThrow = (env: string): string => {
 };
 
 export const handler = buildApi(
-  buildUserService(buildDynamoUserRepo(envOrThrow('DYNAMODB_TABLE_NAME'), XRay.captureAWSClient(new DynamoDB()))),
+  buildUserService(
+    buildDynamoUserRepo(envOrThrow('DYNAMODB_TABLE_NAME'), XRay.captureAWSClient(new DynamoDB())),
+    envOrThrow('USEREVENTS_TOPIC_ARN')
+  ),
   buildJwt(envOrThrow('JWT_SECRET'))
 );

@@ -1,0 +1,13 @@
+{
+  "name": "dynamodb-event-dispatcher",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.1143.0",
+    "jest": "^28.1.0"
+  }
+}

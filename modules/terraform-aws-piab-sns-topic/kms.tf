@@ -28,7 +28,7 @@ data "aws_iam_policy_document" "key_policy" {
     effect = "Allow"
     principals {
       identifiers = [
-      "*"]
+      "arn:aws:iam::${data.aws_caller_identity.me.account_id}:*"]
       type = "AWS"
     }
     actions = [

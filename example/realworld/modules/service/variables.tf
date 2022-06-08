@@ -10,6 +10,10 @@ variable "dependencies_folder" {
   type = string
 }
 
+variable "publishes_events_via_dynamo" {
+  type    = bool
+  default = true
+}
 variable "api_handler" {
   type = object({
     handler          = string
