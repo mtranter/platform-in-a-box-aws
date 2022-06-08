@@ -1,9 +1,0 @@
-*/*/.terraform
-*/*/.idea
-*/*/.terraform.lock.hcl
-*/*/node_modules    
-*/*/dist/
-*/*/coverage/
-package/
-Earthfile
-terraform/

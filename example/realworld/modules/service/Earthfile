@@ -1,9 +1,0 @@
-VERSION 0.6
-
-build:
-  FROM ./../../../..+build-modules
-  WORKDIR /project/example/realworld/modules/service
-  COPY ./* ./
-  COPY ./../dynamodb-event-dispatcher+build/* ./../dynamodb-event-dispatcher/
-  RUN terraform init
-  SAVE IMAGE service-module 

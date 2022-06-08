@@ -1,4 +1,0 @@
-VERSION 0.6
-
-deploy:
-  BUILD ./services/users+deploy
