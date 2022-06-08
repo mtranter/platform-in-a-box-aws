@@ -37,13 +37,15 @@ locals {
 }
 
 resource "aws_dynamodb_table" "table" {
-  hash_key       = var.hash_key.name
-  range_key      = var.range_key == null ? null : var.range_key.name
-  name           = var.name
-  read_capacity  = var.provisioned_capacity == null ? null : var.provisioned_capacity.read
-  write_capacity = var.provisioned_capacity == null ? null : var.provisioned_capacity.write
-  billing_mode   = var.provisioned_capacity == null ? "PAY_PER_REQUEST" : "PROVISIONED"
-  tags           = var.tags
+  hash_key         = var.hash_key.name
+  range_key        = var.range_key == null ? null : var.range_key.name
+  name             = var.name
+  read_capacity    = var.provisioned_capacity == null ? null : var.provisioned_capacity.read
+  write_capacity   = var.provisioned_capacity == null ? null : var.provisioned_capacity.write
+  billing_mode     = var.provisioned_capacity == null ? "PAY_PER_REQUEST" : "PROVISIONED"
+  tags             = var.tags
+  stream_enabled   = var.stream_enabled
+  stream_view_type = var.stream_view_type
 
   point_in_time_recovery {
     enabled = var.point_in_time_recovery_enabled
