@@ -20,6 +20,8 @@ module "conditional_check_failed_alarm" {
   dimensions = {
     TableName = aws_dynamodb_table.table.name
   }
+
+  alarm_actions = var.alert_config.alert_topics
 }
 
 module "read_throttles_alarm" {
@@ -43,6 +45,8 @@ module "read_throttles_alarm" {
   dimensions = {
     TableName = aws_dynamodb_table.table.name
   }
+
+  alarm_actions = var.alert_config.alert_topics
 }
 
 module "write_throttles_alarm" {
@@ -66,6 +70,8 @@ module "write_throttles_alarm" {
   dimensions = {
     TableName = aws_dynamodb_table.table.name
   }
+
+  alarm_actions = var.alert_config.alert_topics
 }
 
 module "system_errors_alarm" {
@@ -89,6 +95,8 @@ module "system_errors_alarm" {
   dimensions = {
     TableName = aws_dynamodb_table.table.name
   }
+
+  alarm_actions = var.alert_config.alert_topics
 }
 
 module "transaction_conflict_alarm" {
@@ -112,6 +120,8 @@ module "transaction_conflict_alarm" {
   dimensions = {
     TableName = aws_dynamodb_table.table.name
   }
+
+  alarm_actions = var.alert_config.alert_topics
 }
 
 

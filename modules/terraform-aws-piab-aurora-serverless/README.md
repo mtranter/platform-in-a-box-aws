@@ -40,7 +40,7 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_alert_config"></a> [alert\_config](#input\_alert\_config) | n/a | <pre>object({<br>    max_connections_pct     = number<br>    max_cpu_utilization_pct = number<br>  })</pre> | <pre>{<br>  "max_connections_pct": 50,<br>  "max_cpu_utilization_pct": 50<br>}</pre> | no |
+| <a name="input_alert_config"></a> [alert\_config](#input\_alert\_config) | n/a | <pre>object({<br>    max_connections_pct     = number<br>    max_cpu_utilization_pct = number<br>    alert_topics            = optional(list(string))<br>  })</pre> | <pre>{<br>  "alert_topics": null,<br>  "max_connections_pct": 50,<br>  "max_cpu_utilization_pct": 50<br>}</pre> | no |
 | <a name="input_allowed_security_group_ids"></a> [allowed\_security\_group\_ids](#input\_allowed\_security\_group\_ids) | The list of security groups allowed to access this instance | `list(string)` | n/a | yes |
 | <a name="input_aurora_engine"></a> [aurora\_engine](#input\_aurora\_engine) | mysql or postgresql | `string` | n/a | yes |
 | <a name="input_backup_retention_period"></a> [backup\_retention\_period](#input\_backup\_retention\_period) | The days to retain backups for. | `number` | `7` | no |

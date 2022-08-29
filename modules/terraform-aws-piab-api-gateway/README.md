@@ -32,6 +32,7 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_alarm_on_500"></a> [alarm\_on\_500](#input\_alarm\_on\_500) | If true, a CloudWatch alert will fire for 500 errors | `bool` | n/a | yes |
+| <a name="input_alert_topics"></a> [alert\_topics](#input\_alert\_topics) | (optional) A list of SNS Topic ARNs that will broadcast any cloudwatch alarms | `list(string)` | `null` | no |
 | <a name="input_api_name"></a> [api\_name](#input\_api\_name) | The name of this API | `string` | n/a | yes |
 | <a name="input_api_openapi_spec"></a> [api\_openapi\_spec](#input\_api\_openapi\_spec) | The Open API Spec body | `string` | n/a | yes |
 | <a name="input_live_stage_name"></a> [live\_stage\_name](#input\_live\_stage\_name) | The name of the API Gateway stage used for live. | `string` | `"live"` | no |

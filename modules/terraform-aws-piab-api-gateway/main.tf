@@ -89,4 +89,6 @@ module "alarm_500s" {
     ApiName = var.api_name
     Stage   = var.live_stage_name
   }
+
+  alarm_actions = var.alert_topics
 }

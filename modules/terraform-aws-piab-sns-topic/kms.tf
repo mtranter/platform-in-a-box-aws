@@ -28,7 +28,7 @@ data "aws_iam_policy_document" "key_policy" {
     effect = "Allow"
     principals {
       identifiers = ["*"]
-      type = "AWS"
+      type        = "AWS"
     }
     actions = [
       "kms:Encrypt",

@@ -63,4 +63,6 @@ module "dlq_alarm" {
   dimensions = {
     QueueName = aws_sqs_queue.queue.name
   }
+
+  alarm_actions = var.alert_topics
 }

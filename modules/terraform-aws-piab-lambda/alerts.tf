@@ -19,6 +19,8 @@ module "errors_alarm" {
   dimensions = {
     FunctionName = aws_lambda_function.lambda.function_name
   }
+
+  alarm_actions = var.alert_config.alert_topics
 }
 
 module "throttles_alarm" {
@@ -42,6 +44,8 @@ module "throttles_alarm" {
   dimensions = {
     FunctionName = aws_lambda_function.lambda.function_name
   }
+
+  alarm_actions = var.alert_config.alert_topics
 }
 
 
@@ -66,6 +70,8 @@ module "dlq_alarm" {
   dimensions = {
     QueueName = module.dlq[0].queue.name
   }
+
+  alarm_actions = var.alert_config.alert_topics
 }
 
 module "dlq_failed_alarm" {
@@ -89,6 +95,8 @@ module "dlq_failed_alarm" {
   dimensions = {
     FunctionName = aws_lambda_function.lambda.function_name
   }
+
+  alarm_actions = var.alert_config.alert_topics
 }
 
 
@@ -113,4 +121,6 @@ module "max_duration_alarm" {
   dimensions = {
     FunctionName = aws_lambda_function.lambda.function_name
   }
+
+  alarm_actions = var.alert_config.alert_topics
 }

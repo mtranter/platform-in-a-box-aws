@@ -36,6 +36,8 @@ module "db_connections" {
   dimensions = {
     DBInstanceIdentifier = aws_rds_cluster.rds.id
   }
+
+  alarm_actions = var.alert_config.alert_topics
 }
 
 module "max_cpu_alarm" {
@@ -59,4 +61,6 @@ module "max_cpu_alarm" {
   dimensions = {
     DBInstanceIdentifier = aws_rds_cluster.rds.id
   }
+
+  alarm_actions = var.alert_config.alert_topics
 }

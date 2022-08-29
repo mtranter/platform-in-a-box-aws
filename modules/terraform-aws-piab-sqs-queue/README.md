@@ -35,6 +35,7 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_alert_on_dlq"></a> [alert\_on\_dlq](#input\_alert\_on\_dlq) | Create a cloudwatch alert if messages are sent to the Dead Letter Queue | `bool` | `true` | no |
+| <a name="input_alert_topics"></a> [alert\_topics](#input\_alert\_topics) | (optional) List of SNS topic arns that will be used to broadcast Cloudwatch Alarms | `list(string)` | `null` | no |
 | <a name="input_content_based_deduplication"></a> [content\_based\_deduplication](#input\_content\_based\_deduplication) | n/a | `bool` | `null` | no |
 | <a name="input_create_dlq"></a> [create\_dlq](#input\_create\_dlq) | If true, will create a DLQ for this queue | `bool` | `true` | no |
 | <a name="input_deduplication_scope"></a> [deduplication\_scope](#input\_deduplication\_scope) | The deduplication scope. Either `messageGroup` or `queue` | `string` | `"messageGroup"` | no |

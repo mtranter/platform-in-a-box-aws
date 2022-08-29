@@ -12,7 +12,7 @@ variable "bucket_name" {
 
 variable "tags" {
   type    = map(string)
-  default = {}
+  default = null
 }
 
 variable "bucket_prefix" {

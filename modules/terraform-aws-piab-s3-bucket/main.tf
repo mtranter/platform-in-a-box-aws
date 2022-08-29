@@ -6,56 +6,19 @@ terraform {
   experiments = [module_variable_optional_attrs]
 }
 
-#tfsec:ignore:aws-s3-enable-versioning tfsec:ignore:aws-s3-enable-bucket-logging
+#tfsec:ignore:aws-s3-enable-bucket-logging
 resource "aws_s3_bucket" "bucket" {
   bucket = var.bucket
+}
 
-  versioning {
-    enabled = var.versioning_enabled
-  }
+#tfsec:ignore:aws-s3-enable-versioning
+resource "aws_s3_bucket_versioning" "versioning_example" {
 
-  dynamic "lifecycle_rule" {
-    for_each = local.lifecycle_transitions
-    iterator = each
-    content {
-      enabled                                = true
-      id                                     = each.value.id
-      prefix                                 = each.value.prefix
-      tags                                   = each.value.tags
-      abort_incomplete_multipart_upload_days = each.value.abort_incomplete_multipart_upload_days
-      dynamic "expiration" {
-        for_each = each.value.expiration == null ? [] : [1]
-        content {
-          date                         = each.value.expiration.date
-          days                         = each.value.expiration.days
-          expired_object_delete_marker = each.value.expiration.expired_object_delete_marker
-        }
-      }
+  bucket = aws_s3_bucket.bucket.id
 
-      dynamic "transition" {
-        for_each = each.value.transition == null ? [] : [1]
-        content {
-          date          = each.value.transition.date
-          days          = each.value.transition.days
-          storage_class = each.value.transition.storage_class
-        }
-      }
 
-      dynamic "noncurrent_version_expiration" {
-        for_each = each.value.noncurrent_version_expiration == null ? [] : [1]
-        content {
-          days = each.value.noncurrent_version_expiration.days
-        }
-      }
-
-      dynamic "noncurrent_version_transition" {
-        for_each = each.value.noncurrent_version_transition == null ? [] : [1]
-        content {
-          days          = each.value.noncurrent_version_transition.days
-          storage_class = each.value.noncurrent_version_transition.storage_class
-        }
-      }
-    }
+  versioning_configuration {
+    status = var.versioning_enabled ? "Enabled" : "Disabled"
   }
 }
 
@@ -92,14 +55,55 @@ resource "aws_s3_bucket_public_access_block" "block_public_access" {
   restrict_public_buckets = true
 }
 
-resource "aws_s3_bucket_lifecycle_configuration" "example" {
+resource "aws_s3_bucket_lifecycle_configuration" "lifecycle" {
   bucket = aws_s3_bucket.bucket.id
 
-  rule {
-    id = "rule-1"
+  dynamic "rule" {
+    for_each = local.lifecycle_transitions
+    iterator = each
+    content {
+      status = "Enabled"
+      id     = each.value.id
+      prefix = each.value.prefix
+      dynamic "abort_incomplete_multipart_upload" {
+        for_each = each.value.abort_incomplete_multipart_upload_days == null ? [] : [1]
+        iterator = each
+        content {
+          days_after_initiation = each.value.abort_incomplete_multipart_upload_days
+        }
+      }
+      dynamic "expiration" {
+        for_each = each.value.expiration == null ? [] : [1]
+        content {
+          date                         = each.value.expiration.date
+          days                         = each.value.expiration.days
+          expired_object_delete_marker = each.value.expiration.expired_object_delete_marker
+        }
+      }
 
-    # ... other transition/expiration actions ...
+      dynamic "transition" {
+        for_each = each.value.transition == null ? [] : [1]
+        content {
+          date          = each.value.transition.date
+          days          = each.value.transition.days
+          storage_class = each.value.transition.storage_class
+        }
+      }
 
-    status = "Enabled"
+      dynamic "noncurrent_version_expiration" {
+        for_each = each.value.noncurrent_version_expiration == null ? [] : [1]
+        content {
+          noncurrent_days = each.value.noncurrent_version_expiration.days
+        }
+      }
+
+      dynamic "noncurrent_version_transition" {
+        for_each = each.value.noncurrent_version_transition == null ? [] : [1]
+        content {
+          noncurrent_days = each.value.noncurrent_version_transition.days
+          storage_class   = each.value.noncurrent_version_transition.storage_class
+        }
+      }
+    }
   }
 }

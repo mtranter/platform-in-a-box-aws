@@ -159,7 +159,7 @@ variable "alert_config" {
     on_failed_to_replicate                 = optional(bool)
     on_system_errors                       = optional(bool)
     on_transaction_conflict_per_minute     = optional(number)
-
+    alert_topics                           = optional(list(string))
   })
   default = {
     on_conditional_check_failed_per_minute = null
@@ -167,6 +167,7 @@ variable "alert_config" {
     on_write_throttles_per_minute          = null
     on_system_errors                       = true
     on_transaction_conflict_per_minute     = null
+    alert_topics                           = null
   }
   description = <<EOF
 Configuration for Cloudwatch alarms. e.g

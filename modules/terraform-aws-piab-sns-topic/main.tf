@@ -75,4 +75,6 @@ module "errors_alarm" {
   dimensions = {
     TopicName = aws_sns_topic.topic.name
   }
+
+  alarm_actions = var.alert_topics
 }

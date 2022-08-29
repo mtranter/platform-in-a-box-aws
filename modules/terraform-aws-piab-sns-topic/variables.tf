@@ -16,7 +16,7 @@ variable "content_based_deduplication" {
 
 variable "tags" {
   type        = map(string)
-  default     = {}
+  default     = null
   description = "Any tags for this queue"
 }
 
@@ -36,4 +36,10 @@ variable "key_policy_sources" {
 An IAM policy that will be merged with the KMS Key policy for this topic
 See here: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#source_policy_documents
 EOF
+}
+
+variable "alert_topics" {
+  type        = list(string)
+  description = "(optional) List of SNS topic arns that will be used to broadcast Cloudwatch Alarms"
+  default     = null
 }

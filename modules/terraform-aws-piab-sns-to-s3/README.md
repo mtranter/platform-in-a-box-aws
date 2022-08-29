@@ -15,8 +15,8 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_cloudwatch_logs"></a> [cloudwatch\_logs](#module\_cloudwatch\_logs) | ./..//terraform-aws-piab-log-group | n/a |
-| <a name="module_forwarder"></a> [forwarder](#module\_forwarder) | ./fifo_forwarder | n/a |
+| <a name="module_fifo_forwarder"></a> [fifo\_forwarder](#module\_fifo\_forwarder) | ./fifo_forwarder | n/a |
+| <a name="module_forwader_cloudwatch_logs"></a> [forwader\_cloudwatch\_logs](#module\_forwader\_cloudwatch\_logs) | ./..//terraform-aws-piab-log-group | n/a |
 
 ## Resources
 
@@ -37,12 +37,9 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_bucket_kms_key_arn"></a> [bucket\_kms\_key\_arn](#input\_bucket\_kms\_key\_arn) | n/a | `string` | `null` | no |
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | n/a | `string` | n/a | yes |
 | <a name="input_bucket_prefix"></a> [bucket\_prefix](#input\_bucket\_prefix) | n/a | `string` | n/a | yes |
-| <a name="input_content_based_deduplication"></a> [content\_based\_deduplication](#input\_content\_based\_deduplication) | n/a | `bool` | `null` | no |
-| <a name="input_is_fifo"></a> [is\_fifo](#input\_is\_fifo) | n/a | `bool` | n/a | yes |
-| <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map(string)` | `{}` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map(string)` | `null` | no |
 | <a name="input_task_name"></a> [task\_name](#input\_task\_name) | n/a | `string` | n/a | yes |
 | <a name="input_topic_name"></a> [topic\_name](#input\_topic\_name) | n/a | `string` | n/a | yes |
 

@@ -85,3 +85,9 @@ variable "alert_on_dlq" {
   type        = bool
   description = "Create a cloudwatch alert if messages are sent to the Dead Letter Queue"
 }
+
+variable "alert_topics" {
+  type        = list(string)
+  description = "(optional) List of SNS topic arns that will be used to broadcast Cloudwatch Alarms"
+  default     = null
+}

@@ -117,7 +117,7 @@ variable "alert_config" {
     on_dlq         = bool
     on_dlq_failure = bool
     max_duration   = optional(number)
-
+    alert_topics   = optional(list(string))
   })
   default = {
     on_error       = true
@@ -125,6 +125,7 @@ variable "alert_config" {
     on_dlq         = true
     on_dlq_failure = true
     max_duration   = null
+    alert_topics   = null
   }
   description = <<EOF
 Configuration for Cloudwatch alarms. e.g
@@ -134,6 +135,7 @@ alert_config = {
     on_dlq         = true
     on_dlq_failure = true
     max_duration   = 500 // Will alarm if invocation duration exceeds this value
+    alert_topic_arn = "arn:aws:sns:eu-west-1:123456789:my-sns-topic"
 }
 EOF
 }

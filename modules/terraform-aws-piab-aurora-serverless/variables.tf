@@ -102,10 +102,12 @@ variable "alert_config" {
   type = object({
     max_connections_pct     = number
     max_cpu_utilization_pct = number
+    alert_topics            = optional(list(string))
   })
 
   default = {
     max_connections_pct     = 50
     max_cpu_utilization_pct = 50
+    alert_topics            = null
   }
 }

@@ -36,10 +36,11 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_alert_topics"></a> [alert\_topics](#input\_alert\_topics) | (optional) List of SNS topic arns that will be used to broadcast Cloudwatch Alarms | `list(string)` | `null` | no |
 | <a name="input_content_based_deduplication"></a> [content\_based\_deduplication](#input\_content\_based\_deduplication) | Use Content based deduplication for a FIFO queue | `bool` | `null` | no |
 | <a name="input_is_fifo"></a> [is\_fifo](#input\_is\_fifo) | Create a FIFO queue | `bool` | n/a | yes |
 | <a name="input_key_policy_sources"></a> [key\_policy\_sources](#input\_key\_policy\_sources) | An IAM policy that will be merged with the KMS Key policy for this topic<br>See here: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#source_policy_documents | `list(string)` | `null` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | Any tags for this queue | `map(string)` | `{}` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Any tags for this queue | `map(string)` | `null` | no |
 | <a name="input_topic_name"></a> [topic\_name](#input\_topic\_name) | The name of this topic. If it is a FIFO topic, '.fifo' will be appended to the name | `string` | n/a | yes |
 | <a name="input_topic_policy_sources"></a> [topic\_policy\_sources](#input\_topic\_policy\_sources) | An IAM policy that will be merged with the Topic policy<br>See here: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#source_policy_documents | `list(string)` | `null` | no |
 
