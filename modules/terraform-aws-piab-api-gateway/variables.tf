@@ -9,9 +9,10 @@ variable "live_stage_name" {
   description = "The name of the API Gateway stage used for live."
 }
 
-variable "api_openapi_spec" {
+variable "openapi_spec" {
   type        = string
-  description = "The Open API Spec body"
+  description = "(optional) The Open API Spec body"
+  default     = null
 }
 
 variable "alarm_on_500" {
@@ -23,4 +24,21 @@ variable "alert_topics" {
   type        = list(string)
   description = "(optional) A list of SNS Topic ARNs that will broadcast any cloudwatch alarms"
   default     = null
+}
+
+variable "create_health_check" {
+  type        = bool
+  description = "(optional) if true, and if open_api_spec = null, creates a healthcheck endpoint"
+}
+
+variable "healthcheck_config" {
+  type = object({
+    path    = string
+    enabled = bool
+  })
+  description = "(optional) describe your variable"
+  default = {
+    enabled = false
+    path    = "__health"
+  }
 }
