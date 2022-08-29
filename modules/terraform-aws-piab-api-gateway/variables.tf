@@ -26,11 +26,6 @@ variable "alert_topics" {
   default     = null
 }
 
-variable "create_health_check" {
-  type        = bool
-  description = "(optional) if true, and if open_api_spec = null, creates a healthcheck endpoint"
-}
-
 variable "healthcheck_config" {
   type = object({
     path    = string
