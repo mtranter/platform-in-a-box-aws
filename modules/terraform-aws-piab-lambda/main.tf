@@ -73,8 +73,8 @@ data "aws_iam_policy_document" "can_sqs_dlq" {
 resource "aws_lambda_layer_version" "layers" {
   for_each         = var.layers_source
   layer_name       = each.key
-  source_code_hash = filebase64sha256(each.value)
-  filename         = each.value
+  source_code_hash = coalesce(each.value.source_code_hash, filebase64sha256(each.value.filename))
+  filename         = each.value.filename
   compatible_runtimes = [
   var.runtime]
 }

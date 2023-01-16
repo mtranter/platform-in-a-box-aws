@@ -49,7 +49,7 @@ resource "aws_lambda_function" "lambda" {
   role                           = aws_iam_role.iam_for_lambda.arn
   runtime                        = var.runtime
   filename                       = var.filename
-  source_code_hash               = filebase64sha256(var.filename)
+  source_code_hash               = coalesce(var.source_code_hash, filebase64sha256(var.filename))
   timeout                        = var.timeout
   memory_size                    = var.memory_size
   layers                         = concat(var.layers, local.insights_layer, [for l in aws_lambda_layer_version.layers : l.arn])

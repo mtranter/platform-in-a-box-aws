@@ -24,6 +24,11 @@ variable "filename" {
   description = "The file containing the lambda code."
 }
 
+variable "source_code_hash" {
+  type = string
+  default = null
+}
+
 variable "timeout" {
   type    = number
   default = 3
@@ -41,7 +46,10 @@ variable "layers" {
 }
 
 variable "layers_source" {
-  type        = map(string)
+  type = map(object({
+    filename         = string
+    source_code_hash = optional(string)
+  }))
   description = "A map of layer name to layer source"
   default     = {}
 }
