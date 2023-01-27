@@ -1,7 +1,3 @@
-terraform {
-  experiments = [module_variable_optional_attrs]
-}
-
 locals {
   key_attributes = [
     for k in [var.hash_key, var.range_key] : {

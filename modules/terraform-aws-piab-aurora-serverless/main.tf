@@ -1,8 +1,3 @@
-terraform {
-  experiments = [module_variable_optional_attrs]
-}
-
-
 locals {
   port   = var.aurora_engine == "postgresql" ? 5432 : 3306
   engine = "aurora-${var.aurora_engine}"

@@ -2,10 +2,6 @@ locals {
   lifecycle_transitions = { for o in var.lifecycle_transitions : o.id => o }
 }
 
-terraform {
-  experiments = [module_variable_optional_attrs]
-}
-
 #tfsec:ignore:aws-s3-enable-bucket-logging
 resource "aws_s3_bucket" "bucket" {
   bucket = var.bucket
