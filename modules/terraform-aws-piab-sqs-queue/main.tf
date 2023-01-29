@@ -12,7 +12,6 @@ resource "aws_sqs_queue" "dead_letter_queue" {
 
   fifo_queue                  = var.is_fifo
   deduplication_scope         = local.dedup ? var.deduplication_scope : null
-  fifo_throughput_limit       = var.fifo_throughput_limit
   content_based_deduplication = local.dedup
 
   tags = var.tags
