@@ -1,6 +1,6 @@
 resource "aws_kms_alias" "alias" {
   count = var.use_custom_kms ? 1 : 0
-  target_key_id = aws_kms_key.key.id
+  target_key_id = aws_kms_key.key[0].id
   name          = "alias/s3/${replace(var.bucket, ".", "-")}"
 }
 
