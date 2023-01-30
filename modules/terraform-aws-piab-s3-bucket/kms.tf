@@ -28,7 +28,7 @@ resource "aws_kms_key" "key" {
             "Sid" : "Allow access through Amazon S3 for all principals in the account that are authorized to use Amazon Se",
             "Effect" : "Allow",
             "Principal" : {
-              "AWS" :  "arn:aws:iam::${data.aws_caller_identity.me.account_id}:*"
+              "AWS" :  "*"
             },
             "Action" : [ "kms:Encrypt", "kms:Decrypt", "kms:ReEncrypt*", "kms:GenerateDataKey*", "kms:CreateGrant", "kms:DescribeKey" ],
             "Resource" : "*",

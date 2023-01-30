@@ -19,7 +19,7 @@ resource "aws_s3_bucket_versioning" "versioning_example" {
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "example" {
-  bucket = aws_s3_bucket.bucket.bucket
+  bucket = aws_s3_bucket.bucket.id
 
   rule {
     apply_server_side_encryption_by_default {
@@ -30,13 +30,13 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "example" {
 }
 
 resource "aws_s3_bucket_acl" "acl" {
-  bucket = aws_s3_bucket.bucket.bucket
+  bucket = aws_s3_bucket.bucket.id
   acl    = "private"
 }
 
 resource "aws_s3_bucket_logging" "logging" {
   count  = var.access_logs == null ? 0 : 1
-  bucket = aws_s3_bucket.bucket.bucket
+  bucket = aws_s3_bucket.bucket.id
 
   target_bucket = var.access_logs.target_bucket
   target_prefix = coalesce(var.access_logs.target_prefix, "${var.bucket}/")
