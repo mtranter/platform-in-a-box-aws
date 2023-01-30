@@ -38,4 +38,5 @@ variable "lifecycle_transitions" {
       storage_class = string
     }))
   }))
+  default = []
 }

@@ -52,6 +52,7 @@ resource "aws_s3_bucket_public_access_block" "block_public_access" {
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "lifecycle" {
+  count  = length(var.lifecycle_transitions) > 0 ? 1 : 0
   bucket = aws_s3_bucket.bucket.id
 
   dynamic "rule" {
