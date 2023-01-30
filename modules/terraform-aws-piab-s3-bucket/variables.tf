@@ -40,3 +40,9 @@ variable "lifecycle_transitions" {
   }))
   default = []
 }
+
+
+variable "use_custom_kms" {
+  type    = bool
+  default = true
+}

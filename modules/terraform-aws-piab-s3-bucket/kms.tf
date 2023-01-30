@@ -1,4 +1,5 @@
 resource "aws_kms_alias" "alias" {
+  count = var.use_custom_kms ? 1 : 0
   target_key_id = aws_kms_key.key.id
   name          = "alias/s3/${replace(var.bucket, ".", "-")}"
 }
@@ -7,6 +8,7 @@ data "aws_caller_identity" "me" {}
 data "aws_region" "current" {}
 
 resource "aws_kms_key" "key" {
+  count = var.use_custom_kms ? 1 : 0
   # checkov:skip=CKV_AWS_33: Using CallerAccount predicate
   description         = "Key for S3 bucket ${var.bucket}"
   enable_key_rotation = true
