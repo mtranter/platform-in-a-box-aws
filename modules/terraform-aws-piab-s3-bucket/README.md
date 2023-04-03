@@ -2,7 +2,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.0 |
 
 ## Providers
@@ -37,7 +37,8 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_access_logs"></a> [access\_logs](#input\_access\_logs) | n/a | <pre>object({<br>    target_bucket = string<br>    target_prefix = optional(string)<br>  })</pre> | `null` | no |
 | <a name="input_bucket"></a> [bucket](#input\_bucket) | n/a | `string` | n/a | yes |
-| <a name="input_lifecycle_transitions"></a> [lifecycle\_transitions](#input\_lifecycle\_transitions) | n/a | <pre>set(object({<br>    id                                     = string<br>    prefix                                 = optional(string)<br>    tags                                   = optional(map(string))<br>    abort_incomplete_multipart_upload_days = optional(bool)<br>    expiration = optional(object({<br>      date                         = optional(string)<br>      days                         = optional(number)<br>      expired_object_delete_marker = optional(string)<br>    }))<br>    transition = optional(object({<br>      date          = optional(string)<br>      days          = optional(number)<br>      storage_class = string<br>    }))<br>    noncurrent_version_expiration = optional(object({<br>      days = number<br>    }))<br>    noncurrent_version_transition = optional(object({<br>      days          = number<br>      storage_class = string<br>    }))<br>  }))</pre> | n/a | yes |
+| <a name="input_lifecycle_transitions"></a> [lifecycle\_transitions](#input\_lifecycle\_transitions) | n/a | <pre>set(object({<br>    id                                     = string<br>    prefix                                 = optional(string)<br>    tags                                   = optional(map(string))<br>    abort_incomplete_multipart_upload_days = optional(bool)<br>    expiration = optional(object({<br>      date                         = optional(string)<br>      days                         = optional(number)<br>      expired_object_delete_marker = optional(string)<br>    }))<br>    transition = optional(object({<br>      date          = optional(string)<br>      days          = optional(number)<br>      storage_class = string<br>    }))<br>    noncurrent_version_expiration = optional(object({<br>      days = number<br>    }))<br>    noncurrent_version_transition = optional(object({<br>      days          = number<br>      storage_class = string<br>    }))<br>  }))</pre> | `[]` | no |
+| <a name="input_use_custom_kms"></a> [use\_custom\_kms](#input\_use\_custom\_kms) | n/a | `bool` | `true` | no |
 | <a name="input_versioning_enabled"></a> [versioning\_enabled](#input\_versioning\_enabled) | n/a | `bool` | n/a | yes |
 
 ## Outputs

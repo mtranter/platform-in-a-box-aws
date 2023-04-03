@@ -2,14 +2,14 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~> 0.21.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
+| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | >= 0.45.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | 0.21.0 |
+| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | 0.45.0 |
 
 ## Modules
 
@@ -19,8 +19,8 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [auth0_client.app](https://registry.terraform.io/providers/alexkappa/auth0/latest/docs/resources/client) | resource |
-| [auth0_client_grant.client_grant](https://registry.terraform.io/providers/alexkappa/auth0/latest/docs/resources/client_grant) | resource |
+| [auth0_client.app](https://registry.terraform.io/providers/auth0/auth0/latest/docs/resources/client) | resource |
+| [auth0_client_grant.client_grant](https://registry.terraform.io/providers/auth0/auth0/latest/docs/resources/client_grant) | resource |
 
 ## Inputs
 

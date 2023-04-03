@@ -2,7 +2,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.0 |
 
 ## Providers
@@ -60,7 +60,7 @@
 | <a name="input_handler"></a> [handler](#input\_handler) | The handler function | `string` | n/a | yes |
 | <a name="input_keep_warm"></a> [keep\_warm](#input\_keep\_warm) | If true, a cloudwatch cron will trigger this function every 5 minutes to minimise cold starts | `bool` | `false` | no |
 | <a name="input_layers"></a> [layers](#input\_layers) | A list of layer arns that the lambda function will use | `list(string)` | `[]` | no |
-| <a name="input_layers_source"></a> [layers\_source](#input\_layers\_source) | A map of layer name to layer source | `map(string)` | `{}` | no |
+| <a name="input_layers_source"></a> [layers\_source](#input\_layers\_source) | A map of layer name to layer source | <pre>map(object({<br>    filename         = string<br>    source_code_hash = optional(string)<br>  }))</pre> | `{}` | no |
 | <a name="input_memory_size"></a> [memory\_size](#input\_memory\_size) | n/a | `number` | `512` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the function | `string` | n/a | yes |
 | <a name="input_provisioned_concurrency"></a> [provisioned\_concurrency](#input\_provisioned\_concurrency) | Number of provisioned instances enabled for this function | `number` | `0` | no |
@@ -68,6 +68,7 @@
 | <a name="input_reserved_concurrency"></a> [reserved\_concurrency](#input\_reserved\_concurrency) | The reserved concurrency set for this function | `number` | `-1` | no |
 | <a name="input_runtime"></a> [runtime](#input\_runtime) | n/a | `string` | n/a | yes |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | The service to which this lambda function belongs | `string` | `null` | no |
+| <a name="input_source_code_hash"></a> [source\_code\_hash](#input\_source\_code\_hash) | n/a | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to add to the lambda | `map(string)` | `{}` | no |
 | <a name="input_timeout"></a> [timeout](#input\_timeout) | n/a | `number` | `3` | no |
 | <a name="input_vpc_config"></a> [vpc\_config](#input\_vpc\_config) | The config for the VPC to which this lambda is to be added. Defaults to null | <pre>object({<br>    subnet_ids         = list(string)<br>    security_group_ids = list(string)<br>  })</pre> | `null` | no |

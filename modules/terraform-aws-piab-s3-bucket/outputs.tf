@@ -7,5 +7,5 @@ output "kms_key" {
 }
 
 output "kms_key_alias" {
-  value = var.use_custom_kms ?  aws_kms_alias.alias : null
+  value = var.use_custom_kms ? aws_kms_alias.alias : null
 }

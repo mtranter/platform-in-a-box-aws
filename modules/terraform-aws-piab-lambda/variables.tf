@@ -25,7 +25,7 @@ variable "filename" {
 }
 
 variable "source_code_hash" {
-  type = string
+  type    = string
   default = null
 }
 
