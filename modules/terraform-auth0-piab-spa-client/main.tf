@@ -9,7 +9,6 @@ resource "auth0_client" "app" {
   name                       = var.app_name
   app_type                   = "spa"
   is_first_party             = true
-  token_endpoint_auth_method = "none"
   oidc_conformant            = true
   callbacks                  = local.login_callbacks
   allowed_origins            = var.allowed_origins
