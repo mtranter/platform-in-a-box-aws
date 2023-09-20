@@ -3,6 +3,7 @@ locals {
 }
 
 data "aws_region" "current" {}
+data "aws_caller_identity" "current" {}
 
 module "log_group" {
   source = "./..//terraform-aws-piab-log-group"
@@ -108,4 +109,12 @@ resource "aws_iam_role_policy_attachment" "insights_policy" {
   count      = var.enable_lambda_insights ? 1 : 0
   role       = aws_iam_role.iam_for_lambda.id
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy"
+}
+
+
+resource "aws_lambda_permission" "lambda_function_permission_restrict" {
+  function_name = aws_lambda_function.lambda.function_name
+  statement_id  = "RestrictAccess"
+  action        = "lambda:InvokeFunction"
+  principal     = data.aws_caller_identity.current.account_id
 }
