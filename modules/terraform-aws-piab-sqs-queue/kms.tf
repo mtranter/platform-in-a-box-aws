@@ -51,7 +51,7 @@ data "aws_iam_policy_document" "key_policy" {
 
 resource "aws_kms_key" "key" {
   # checkov:skip=CKV_AWS_33: Using CallerAccount predicate
-  description         = "Key for sns topic ${local.queue_name}"
+  description         = "Key for sqs queue ${local.queue_name}"
   enable_key_rotation = true
   policy              = data.aws_iam_policy_document.key_policy.json
 }
