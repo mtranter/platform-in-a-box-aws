@@ -35,5 +35,5 @@ resource "auth0_client_grant" "client_grant" {
   for_each  = { for v in var.client_grants : v.audience => v.scopes }
   client_id = auth0_client.app.id
   audience  = each.key
-  scope     = each.value
+  scopes     = each.value
 }
